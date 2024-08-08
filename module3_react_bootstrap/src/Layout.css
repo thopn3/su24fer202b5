@@ -1,7 +1,20 @@
 #header, #content, #footer{
-    border: 1px solid gray;
+    /* border: 1px solid gray; */
 }
 
 #content .left,.main,.right{
-    border: 1px solid green;
+    /* border: 1px solid green; */
+}
+
+.auth-form form div{
+    margin-bottom: 20px;
+}
+
+#header ul{
+    list-style: none;
+}
+
+#header ul li{
+    display: inline-block;
+    margin-left: 15px;
 }
