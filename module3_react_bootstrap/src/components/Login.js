@@ -1,5 +1,13 @@
 import { Button, Col, Container, Form, Row } from "react-bootstrap";
 import { useState } from "react";
+import {useNavigate} from "react-router-dom";
+
+// Gia lap 1 mang du lieu tu Back-End tra ve
+const account = [
+    {"id": 1, "email": "user1@gmail.com", "password": "abc@123", "fullname": "Nguyen Hoang Nam"},
+    {"id": 2, "email": "user2@gmail.com", "password": "abc@123", "fullname": "Hoang Duc Binh"},
+    {"id": 3, "email": "user3@gmail.com", "password": "abc@123", "fullname": "Nguyen Hong Hanh"}
+]
 
 export default function Login() {
     // Dinh nghia cac bien de quan ly trang thai du lieu
@@ -7,6 +15,8 @@ export default function Login() {
     const [password, setPassword] = useState("");
     const [msgEmail, setMsgEmail] = useState();
     const [msgPassword, setMsgPassword] = useState();
+    const [msgError, setMsgError] = useState("");
+    const navigate = useNavigate();
 
     function handleLogin(){
         let flag = true;
@@ -25,7 +35,16 @@ export default function Login() {
         }
 
         if(flag == true){
-            alert("Valid account data");
+            const existAccount = account.find(a => a.email === email && a.password === password);
+            if(!existAccount){
+                setMsgError("This account not found!");
+            }else{
+                const {id, email, fullname} = existAccount;
+                // Save into LocalStorage
+                localStorage.setItem("user", JSON.stringify({id, email, fullname}));
+                // Redirect to TodoItem component
+                navigate("/todo");
+            }
         }
     }
 
@@ -36,6 +55,13 @@ export default function Login() {
                     <Row>
                         <Col>
                             <h3>Login Form</h3>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col>
+                            {
+                                msgError && <span style={{color:"red", marginTop:"5px"}}>{msgError}</span>
+                            }
                         </Col>
                     </Row>
                     <Row id="content">

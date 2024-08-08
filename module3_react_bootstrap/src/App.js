@@ -6,6 +6,7 @@ import Footer from "./components/Footer";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from "./components/Login";
 import Register from "./components/Register";
+import TodoItem from "./components/TodoItem";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Route path="/home" element={<Content/>}/>
           <Route path="/auth/login" element={<Login/>}/>
           <Route path="/auth/register" element={<Register/>}/>
+          <Route path="/todo" element={<TodoItem/>}/>
         </Routes>
         <Footer />
       </Container>
